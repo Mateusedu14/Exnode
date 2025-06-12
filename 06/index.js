@@ -1,6 +1,8 @@
+// index.js
 const express = require('express')
 const exphbs = require('express-handlebars')
 const mysql = require('mysql2')
+const path = require('path') // <<< Certifique-se de ter importado 'path'
 
 const app = express()
 
@@ -15,7 +17,12 @@ app.use(
 
 app.use(express.json())
 
-app.use(express.static('public'))
+// Configuração para servir arquivos estáticos da pasta 'public'
+app.use(express.static(path.join(__dirname, 'public'))) // Serve tudo que está em '06/public/'
+
+// NOVO: Configuração para servir arquivos estáticos da pasta 'IMG'
+// Isso fará com que '06/IMG' seja acessível via '/IMG' no navegador.
+app.use('/IMG', express.static(path.join(__dirname, 'IMG'))); // <<< AQUI!
 
 app.get('/', function (req, res) {
   res.render('home')
@@ -30,6 +37,7 @@ app.post('/books/insertbook', function (req, res) {
   conn.query(query, function (err) {
     if (err) {
       console.log(err)
+      return res.status(500).send('Erro ao cadastrar livro.') 
     }
 
     res.redirect('/')
@@ -42,6 +50,7 @@ app.get('/books', function (req, res) {
   conn.query(query, function (err, data) {
     if (err) {
       console.log(err)
+      return res.status(500).send('Erro ao buscar livros.') 
     }
 
     const books = data
@@ -60,6 +69,7 @@ app.get('/books/:id', function (req, res) {
   conn.query(query, function (err, data) {
     if (err) {
       console.log(err)
+      return res.status(500).send('Erro ao buscar livro.') 
     }
 
     const book = data[0]
@@ -78,6 +88,7 @@ app.get('/books/edit/:id', function (req, res) {
   conn.query(query, function (err, data) {
     if (err) {
       console.log(err)
+      return res.status(500).send('Erro ao buscar livro para edição.') 
     }
 
     const book = data[0]
@@ -98,6 +109,7 @@ app.post('/books/updatebook', function (req, res) {
   conn.query(query, function (err) {
     if (err) {
       console.log(err)
+      return res.status(500).send('Erro ao atualizar livro.') 
     }
 
     res.redirect(`/books/edit/${id}`)
@@ -112,6 +124,7 @@ app.post('/books/remove/:id', function (req, res) {
   conn.query(query, function (err) {
     if (err) {
       console.log(err)
+      return res.status(500).send('Erro ao remover livro.') 
     }
 
     res.redirect(`/books`)
@@ -132,5 +145,7 @@ conn.connect(function (err) {
 
   console.log('Conectado ao MySQL!')
 
-  app.listen(3000)
+  app.listen(3000, () => {
+    console.log('Servidor rodando na porta 3000');
+  })
 })

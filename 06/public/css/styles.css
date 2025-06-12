@@ -2,12 +2,26 @@
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
+  /* REMOVIDO: background-image: url(/06/IMG/6714.png); - MOVIDO PARA O BODY */
+}
+
+body {
+  /* Configuração do background da página inteira */
+  background-image: url('/IMG/6714.png'); /* Caminho corrigido para a imagem de background */
+  background-repeat: no-repeat; /* A imagem não vai se repetir */
+  background-size: cover; /* A imagem vai cobrir todo o elemento */
+  background-position: center center; /* Centraliza a imagem */
+  background-attachment: fixed; /* Opcional: a imagem permanece fixa ao rolar a página */
+  min-height: 100vh; /* Garante que o body ocupe toda a altura da tela visível */
+  margin: 0; /* Remove a margem padrão do body */
+  background-color: #f0f0f0; /* Cor de fundo de fallback, caso a imagem não carregue */
 }
 
 #navbar {
   border-bottom: 1px solid #ccc;
   padding: 1em;
   margin-bottom: 1em;
+  background-color: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente para a navbar */
 }
 
 #navbar ul {
@@ -22,11 +36,15 @@
 h1 {
   text-align: center;
   margin-bottom: 1em;
+  color: #ffffff; /* Cor do texto para contraste */
 }
 
 .form {
   width: 450px;
   margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente para o formulário */
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .form-control {
@@ -38,22 +56,47 @@ h1 {
 .form-control label {
   font-weight: bold;
   margin-bottom: 0.3em;
+  color: #555; /* Cor do label */
 }
 
 .form-control input {
   padding: 5px;
 }
 
+/* Estilo para botões de submit (Cadastrar, Editar, Remover) */
+input[type="submit"] {
+  background-color: #007bff; /* Um azul padrão */
+  color: white;
+  padding: 10px 190px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer; /* Muda o cursor para uma mãozinha ao passar por cima */
+  font-size: 1em;
+  margin-top: 1em; /* Adiciona um espaço acima do botão */
+  transition: background-color 0.3s ease; /* Transição suave para o hover */
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3; /* Azul um pouco mais escuro ao passar o mouse */
+  
+}
+
+
 /* BOOKS */
 .books-container {
   width: 450px;
   margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente para o container de livros */
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 1em;
 }
 
 .books-container div {
   border-bottom: 1px solid #ccc;
   padding: 5px;
   margin: 5px;
+  color: #444; /* Cor do texto */
 }
 
 .bold {
@@ -67,6 +110,9 @@ h1 {
 
 #book-page .container {
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente para a página do livro */
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .actions {
@@ -77,4 +123,16 @@ h1 {
 
 .actions a {
   margin-right: 1em;
+  /* Estilo para links de ação, se quiser diferenciá-los dos botões de submit */
+  display: inline-block; /* Para que padding e margem funcionem bem */
+  padding: 8px 12px;
+  background-color: #6c757d; /* Um cinza para links */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.actions a:hover {
+    background-color: #5a6268;
 }
