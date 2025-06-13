@@ -1,12 +1,16 @@
 <h1>Cadastre o seu livro:</h1>
-<form class="form" action="/books/insertbook" method="POST">
+<form class="form" id="cadastroLivroForm" action="/books/insertbook" method="POST">
   <div class="form-control">
     <label for="title">Título:</label>
-    <input type="text" name="title" placeholder="Título do livro">
+    <input type="text" name="title" id="title" placeholder="Título do livro">
   </div>
   <div class="form-control">
     <label for="pageqty">Número de páginas:</label>
-    <input type="number" name="pageqty" placeholder="Quantas páginas o livro tem?">
+    <input type="number" name="pageqty" id="pageqty" placeholder="Quantas páginas o livro tem?">
   </div>
   <input type="submit" value="Cadastrar">
 </form>
+
+<div id="mensagem-sucesso" class="mensagem-sucesso">
+    <span class="icon-book">📚</span> Que legal, você cadastrou mais um livro!!!
+</div>

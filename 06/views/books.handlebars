@@ -1,6 +1,17 @@
 <h1>Livros disponíveis:</h1>
+
+<div class="actions" style="margin-bottom: 2em;">
+  <form action="/books/clear" method="POST" onsubmit="return confirm('Tem certeza que deseja limpar TODOS os livros? Esta ação é irreversível!');">
+    <input type="submit" value="Limpar Lista" class="action-btn delete-btn">
+  </form>
+</div>
+
 <div class="books-container">
   {{#each books}}
-    <div>#{{this.id}} - <span class="bold"><a href="/books/{{this.id}}">{{this.title}}</a></span> - {{this.pageqty}} páginas</div>
+    <div class="book-item">
+      <span class="book-id">#{{this.id}}</span> -
+      <span class="book-title bold"><a href="/books/{{this.id}}">{{this.title}}</a></span> -
+      <span class="book-pages">{{this.pageqty}} páginas</span>
+    </div>
   {{/each}}
 </div>

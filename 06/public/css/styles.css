@@ -1,138 +1,543 @@
+/* GERAIS: Definições base para todo o projeto */
 * {
-  font-family: Helvetica, sans-serif;
-  margin: 0;
-  padding: 0;
-  /* REMOVIDO: background-image: url(/06/IMG/6714.png); - MOVIDO PARA O BODY */
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  /* Configuração do background da página inteira */
-  background-image: url('/IMG/6714.png'); /* Caminho corrigido para a imagem de background */
-  background-repeat: no-repeat; /* A imagem não vai se repetir */
-  background-size: cover; /* A imagem vai cobrir todo o elemento */
-  background-position: center center; /* Centraliza a imagem */
-  background-attachment: fixed; /* Opcional: a imagem permanece fixa ao rolar a página */
-  min-height: 100vh; /* Garante que o body ocupe toda a altura da tela visível */
-  margin: 0; /* Remove a margem padrão do body */
-  background-color: #f0f0f0; /* Cor de fundo de fallback, caso a imagem não carregue */
+    background-image: url('/IMG/6714.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #1a1a2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 80px;
 }
 
+/* NAVBAR: Estilização da barra de navegação */
 #navbar {
-  border-bottom: 1px solid #ccc;
-  padding: 1em;
-  margin-bottom: 1em;
-  background-color: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente para a navbar */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1em;
+    background-color: rgba(255, 255, 255, 0.08);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
 }
 
 #navbar ul {
-  display: flex;
-  list-style: none;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding: 0;
 }
 
 #navbar ul li {
-  margin-left: 1em;
+    margin: 0 1.8em;
 }
 
+#navbar ul li a {
+    color: #e0f2f7;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+#navbar ul li a:hover {
+    color: #00bcd4;
+    text-shadow: 0 0 8px rgba(0, 188, 212, 0.8);
+}
+
+/* TÍTULOS GERAIS (h1): Estilo para os títulos principais da página */
 h1 {
-  text-align: center;
-  margin-bottom: 1em;
-  color: #ffffff; /* Cor do texto para contraste */
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+    color: #e0f2f7;
+    font-size: 3.2em;
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(0, 188, 212, 0.7), 0 0 25px rgba(0, 188, 212, 0.5);
+    letter-spacing: 3px;
+    animation: fadeInDown 1.2s ease-out;
+    position: relative;
+    padding-bottom: 15px;
 }
 
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #00bcd4, transparent);
+    border-radius: 2px;
+    animation: expandLine 1.8s ease-out forwards;
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.6);
+}
+
+@keyframes expandLine {
+    to { width: 70%; }
+}
+
+/* FORMULÁRIOS (.form): Estilo principal para caixas de cadastro/edição */
 .form {
-  width: 450px;
-  margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente para o formulário */
-  padding: 20px;
-  border-radius: 8px;
+    width: 500px;
+    max-width: 95%;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 200, 0.05) 100%);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    animation: fadeInUp 1s ease-out;
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* CONTROLES DE FORMULÁRIO (.form-control): Agrupamento de label e input */
 .form-control {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 0.5em;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.8em;
+    position: relative;
+    width: 100%;
 }
 
 .form-control label {
-  font-weight: bold;
-  margin-bottom: 0.3em;
-  color: #555; /* Cor do label */
+    font-weight: 600;
+    margin-bottom: 0.8em;
+    color: #e0f2f7;
+    font-size: 1.15em;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .form-control input {
-  padding: 5px;
+    padding: 14px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    font-size: 1.1em;
+    color: #e0f2f7;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
 }
 
-/* Estilo para botões de submit (Cadastrar, Editar, Remover) */
+.form-control input::placeholder {
+    color: rgba(255, 255, 255, 0.85); /* Branco com 85% de opacidade para alta visibilidade */
+    font-style: italic;
+    opacity: 1;
+}
+
+.form-control input:focus {
+    border-color: #00bcd4;
+    box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.4), inset 0 1px 5px rgba(0, 0, 0, 0.5);
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* === CORREÇÃO DO BOTÃO LIMPAR LISTA E BOTÃO CADASTRAR/EDITAR === */
+
+/* ESTILO GERAL PARA TODOS OS INPUTS TYPE="SUBMIT" (BÁSICO) */
+/* Este é o estilo de fallback para todos os inputs type="submit".
+   As regras mais específicas (#cadastroLivroForm input[type="submit"] e .action-btn)
+   irão sobrescrever estas propriedades quando aplicável. */
 input[type="submit"] {
-  background-color: #007bff; /* Um azul padrão */
-  color: white;
-  padding: 10px 190px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer; /* Muda o cursor para uma mãozinha ao passar por cima */
-  font-size: 1em;
-  margin-top: 1em; /* Adiciona um espaço acima do botão */
-  transition: background-color 0.3s ease; /* Transição suave para o hover */
+    background: linear-gradient(45deg, #00bcd4, #007bff);
+    color: white;
+    padding: 10px 20px; /* Padding básico */
+    border: none;
+    border-radius: 5px; /* Borda básica */
+    cursor: pointer;
+    font-size: 1em; /* Tamanho da fonte básico */
+    font-weight: 700;
+    margin-top: 1em; /* Margem superior básica */
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    /* REMOVIDO: NENHUMA REGRA DE WIDTH/MAX-WIDTH/DISPLAY/MARGIN AQUI PARA NÃO CONFLITAR */
 }
 
-input[type="submit"]:hover {
-  background-color: #0056b3; /* Azul um pouco mais escuro ao passar o mouse */
-  
+/* ESTILO ESPECÍFICO PARA O BOTÃO "CADASTRAR" (NO FORMULÁRIO PRINCIPAL) */
+/* E PARA O BOTÃO "EDITAR" (NO FORMULÁRIO DE EDIÇÃO) */
+#cadastroLivroForm input[type="submit"],
+form[action="/books/updatebook"] input[type="submit"] {
+    padding: 16px 40px; /* Padding maior */
+    width: 80%; /* Ocupa 80% da largura do formulário */
+    max-width: 300px; /* Limite de largura */
+    border-radius: 50px; /* Formato pílula */
+    margin-top: 2.5em; /* Margem superior maior */
+    box-shadow: 0 10px 25px rgba(0, 188, 212, 0.4); /* Sombra mais forte */
+    letter-spacing: 1.5px; /* Mais espaçamento entre letras */
+    
+    display: block; /* Garante que ocupe sua própria linha */
+    margin-left: auto; /* Centraliza */
+    margin-right: auto; /* Centraliza */
 }
 
 
-/* BOOKS */
+/* ACTIONS: Estilo para a div que contém botões de ação (Editar/Remover/Voltar/Limpar Lista) */
+/* Esta div vai controlar a centralização dos botões/forms que estão DENTRO dela */
+.actions {
+    margin-top: 3em;
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente os itens flexíveis */
+    gap: 1.8em; /* Espaço entre os itens (botões, formulários) */
+    width: 100%; /* Ocupa a largura total para centralizar os itens */
+    flex-wrap: wrap; /* Permite que os itens quebrem linha se não houver espaço */
+
+    /* Adição específica para a página de livros, para dar um respiro com a lista */
+    margin-bottom: 2em; /* Espaço abaixo do botão Limpar Lista e acima da lista */
+}
+
+/* Estilo específico para FORMULÁRIOS DENTRO DE .actions (ex: o form do botão Limpar Lista) */
+.actions form {
+    display: flex; /* O formulário também se torna um flex container */
+    justify-content: center; /* Centraliza o input submit dentro do form */
+    align-items: center; /* Alinha verticalmente */
+    width: auto; /* A largura do formulário se ajusta ao conteúdo (não estica) */
+    max-width: 100%; /* Garante que não transborde */
+    margin: 0; /* Remove margens padrão que possam atrapalhar o flexbox */
+}
+
+
+/* ESTILO GERAL PARA BOTÕES DE AÇÃO (LINKS OU INPUTS COM .action-btn) */
+/* O botão "Limpar Lista" usa .action-btn e .delete-btn.
+   Estas regras ditarão sua largura e espaçamento. */
+.action-btn {
+    display: inline-block; /* Permite que fiquem lado a lado se houver espaço */
+    padding: 14px 25px; /* Padding padrão para action buttons */
+    border: none;
+    border-radius: 50px; /* Formato pílula */
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1em;
+    transition: all 0.4s ease;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.8px;
+    color: white;
+    text-decoration: none;
+    /* Adiciona margem em todos os lados para espaçamento entre os botões */
+    margin: 10px; /* Importante para espaçar o botão Limpar Lista dos outros (ou de si mesmo se for o único) */
+    /* NENHUMA LARGURA FIXA OU PERCENTUAL AQUI - DEIXA O CONTEÚDO DEFINIR A LARGURA */
+    /* min-width: 150px; /* Opcional: para garantir que não fique muito pequeno */
+}
+
+
+/* Estilo específico para o botão de "Voltar" e links de ação genéricos */
+.action-btn { /* Esta regra é redundante se já definida acima, mas se mantém para clareza */
+    background: linear-gradient(45deg, #6c757d, #5a6268); /* Gradiente cinza */
+}
+
+.action-btn:hover {
+    background: linear-gradient(45deg, #5a6268, #6c757d);
+    transform: translateY(-3px);
+    box-shadow: 0 9px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Estilo específico para o botão "Editar" */
+.action-btn.edit-btn {
+    background: linear-gradient(45deg, #007bff, #0056b3); /* Gradiente azul para editar */
+}
+
+.action-btn.edit-btn:hover {
+    background: linear-gradient(45deg, #0056b3, #007bff);
+    transform: translateY(-3px);
+    box-shadow: 0 9px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Estilo específico para o botão "Remover" e "Limpar Lista" */
+.action-btn.delete-btn { /* O botão "Limpar Lista" usa esta classe */
+    background: linear-gradient(45deg, #dc3545, #c82333); /* Gradiente vermelho */
+}
+
+.action-btn.delete-btn:hover {
+    background: linear-gradient(45deg, #c82333, #dc3545);
+    transform: translateY(-3px);
+    box-shadow: 0 9px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* MENSAGEM DE SUCESSO: Estilo para a mensagem flutuante de confirmação */
+#mensagem-sucesso {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, rgba(30, 200, 250, 0.85) 0%, rgba(5, 150, 200, 0.75) 100%);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    font-size: 1.4em;
+    font-weight: 600;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    z-index: 10;
+    width: 80%;
+    max-width: 400px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+@keyframes bounceIn {
+    0% { opacity: 0; transform: translate(-50%, -100px) scale(0.8); }
+    60% { opacity: 1; transform: translate(-50%, -45%) scale(1.05); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+#mensagem-sucesso.show {
+    opacity: 1;
+    visibility: visible;
+    animation: bounceIn 0.6s ease-out;
+}
+
+#mensagem-sucesso .icon-book {
+    font-size: 1.8em;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+/* BOOKS CONTAINER: Estilo para a caixa que lista os livros */
 .books-container {
-  width: 450px;
-  margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente para o container de livros */
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 1em;
+    width: 500px;
+    max-width: 95%;
+    margin: 3em auto;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(200, 200, 200, 0.05) 100%);
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.books-container div {
-  border-bottom: 1px solid #ccc;
-  padding: 5px;
-  margin: 5px;
-  color: #444; /* Cor do texto */
+.books-container .book-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 0;
+    margin: 8px 0;
+    color: #e0f2f7;
+    font-size: 1.1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
+.books-container .book-item:last-child {
+    border-bottom: none;
+}
+
+.books-container .book-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    transform: translateX(5px);
+}
+
+.books-container .book-item a {
+    color: #00bcd4;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.books-container .book-item a:hover {
+    color: #00e0ff;
+    text-shadow: 0 0 8px rgba(0, 188, 212, 0.8);
+}
+
+/* Estilos para as partes específicas do item do livro */
 .bold {
-  font-weight: bold;
+    font-weight: 700;
+    color: #e0f2f7;
 }
 
-/* BOOK */
+.book-id {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9em;
+}
+
+.book-pages {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95em;
+}
+
+/* BOOK PAGE: Estilo para a página de detalhes de um único livro */
 #book-page {
-  padding: 2em;
+    padding: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
 }
 
 #book-page .container {
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente para a página do livro */
-  padding: 20px;
-  border-radius: 8px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 200, 0.05) 100%);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 550px;
+    max-width: 95%;
+    color: #e0f2f7;
 }
 
-.actions {
-  margin-top: 1em;
-  display: flex;
-  justify-content: center;
+#book-page .container h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.8em;
+    color: #00bcd4;
+    text-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+    animation: none;
+    padding-bottom: 0;
+    margin-top: 0;
 }
 
-.actions a {
-  margin-right: 1em;
-  /* Estilo para links de ação, se quiser diferenciá-los dos botões de submit */
-  display: inline-block; /* Para que padding e margem funcionem bem */
-  padding: 8px 12px;
-  background-color: #6c757d; /* Um cinza para links */
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+#book-page .container h1::after {
+    content: none;
 }
 
-.actions a:hover {
-    background-color: #5a6268;
+#book-page .container p {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+    line-height: 1.6;
+}
+
+/* --- NOVO: Estilos para a Página de Erro (error.handlebars) --- */
+#error-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    padding: 2em;
+}
+
+.error-container {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.2) 0%, rgba(180, 40, 50, 0.1) 100%);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px) saturate(150%);
+    border: 1px solid rgba(255, 50, 50, 0.3);
+    width: 600px;
+    max-width: 90%;
+    color: #e0f2f7;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.error-container h1 {
+    font-size: 2.8em;
+    color: #ff6b6b;
+    text-shadow: 0 0 10px rgba(255, 107, 107, 0.6);
+    margin-bottom: 0.8em;
+    animation: none;
+    padding-bottom: 0;
+    margin-top: 0;
+}
+
+.error-container h1::after {
+    content: none;
+}
+
+.error-container .error-message {
+    font-size: 1.3em;
+    color: #fff;
+    margin-bottom: 1.5em;
+    line-height: 1.5;
+}
+
+/* --- NOVO: Estilos para a Página de Sucesso (success.handlebars) --- */
+#success-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    padding: 2em;
+}
+
+.success-container {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(30, 200, 50, 0.2) 0%, rgba(50, 150, 80, 0.1) 100%);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px) saturate(150%);
+    border: 1px solid rgba(50, 200, 80, 0.3);
+    width: 600px;
+    max-width: 90%;
+    color: #e0f2f7;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.success-container h1 {
+    font-size: 2.8em;
+    color: #aaffaa;
+    text-shadow: 0 0 10px rgba(170, 255, 170, 0.6);
+    margin-bottom: 0.8em;
+    animation: none;
+    padding-bottom: 0;
+    margin-top: 0;
+}
+
+.success-container h1::after {
+    content: none;
+}
+
+.success-container .success-message {
+    font-size: 1.3em;
+    color: #fff;
+    margin-bottom: 1.5em;
+    line-height: 1.5;
+}
+
+/* Espaçamento entre os botões na página de sucesso */
+.success-container .action-btn {
+    margin: 10px; /* Adiciona 10px de margem em todos os lados para um bom espaçamento entre eles */
+    display: inline-block; /* Garante que a margem funcione corretamente e que possam ficar na mesma linha */
+    min-width: 200px; /* Opcional: Garante que os botões tenham uma largura mínima para melhor visual */
 }
